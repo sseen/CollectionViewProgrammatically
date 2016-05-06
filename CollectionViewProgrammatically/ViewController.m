@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "CustomCollectionViewCell.h"
+#import "CustomCollectionReusableView.h"
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -24,26 +26,55 @@
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
     
-    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_collectionView registerClass:[CustomCollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_collectionView registerClass:[CustomCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supplementCell"];
     [_collectionView setBackgroundColor:[UIColor colorWithRed:0.18 green:0.24 blue:0.31 alpha:1.00]];
     
     [self.view addSubview:_collectionView];
     
 }
 
+#pragma mark - data
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 25;
+    return 10;
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    CustomCollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supplementCell" forIndexPath:indexPath];
+
+    if (kind == UICollectionElementKindSectionHeader) {
+        reusableview.lblTitle.text = @"hello";
+    }
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        reusableview.lblTitle.text = @"world";
+    }
+    
+    return reusableview;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-
-    cell.backgroundColor=[UIColor colorWithRed:0.23 green:0.60 blue:0.85 alpha:1.00];
+    CustomCollectionViewCell  *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    
+    if (indexPath.section == 0) {
+        cell.backgroundColor = [UIColor colorWithRed:0.23 green:0.60 blue:0.85 alpha:1.00];
+    } else {
+        cell.backgroundColor = [UIColor colorWithRed:0.19 green:0.68 blue:0.39 alpha:1.00];
+    }
+    cell.lblTitle.text = [NSString stringWithFormat:@"%d, %d", (int)indexPath.section , (int)indexPath.row];
+    
     return cell;
 }
+
+#pragma mark - flow 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -62,8 +93,8 @@
 // Layout: Set Edges
 - (UIEdgeInsets)collectionView:
 (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//     return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
     return UIEdgeInsetsMake(0,0,0,0);  // top, left, bottom, right
+    // return UIEdgeInsetsMake(0,8,0,8);
 }
 
 - (float)itemSpacing {
@@ -81,3 +112,4 @@
 }
 
 @end
+

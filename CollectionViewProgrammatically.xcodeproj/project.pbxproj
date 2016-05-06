@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */; };
+		9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */; };
 		FC3570441CBF28BB00C4F404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570431CBF28BB00C4F404 /* main.m */; };
 		FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570461CBF28BB00C4F404 /* AppDelegate.m */; };
 		FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570491CBF28BB00C4F404 /* ViewController.m */; };
@@ -35,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9233AC721CDC409C005221CC /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
+		9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		9233AC751CDC6CEA005221CC /* CustomCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionReusableView.h; sourceTree = "<group>"; };
+		9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionReusableView.m; sourceTree = "<group>"; };
 		FC35703F1CBF28BB00C4F404 /* CollectionViewProgrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewProgrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3570431CBF28BB00C4F404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC3570451CBF28BB00C4F404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +111,10 @@
 				FC3570461CBF28BB00C4F404 /* AppDelegate.m */,
 				FC3570481CBF28BB00C4F404 /* ViewController.h */,
 				FC3570491CBF28BB00C4F404 /* ViewController.m */,
+				9233AC751CDC6CEA005221CC /* CustomCollectionReusableView.h */,
+				9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */,
+				9233AC721CDC409C005221CC /* CustomCollectionViewCell.h */,
+				9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */,
 				FC35704B1CBF28BB00C4F404 /* Main.storyboard */,
 				FC35704E1CBF28BB00C4F404 /* Assets.xcassets */,
 				FC3570501CBF28BB00C4F404 /* LaunchScreen.storyboard */,
@@ -273,6 +283,8 @@
 				FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */,
 				FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */,
 				FC3570441CBF28BB00C4F404 /* main.m in Sources */,
+				9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */,
+				9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
