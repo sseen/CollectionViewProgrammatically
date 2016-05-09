@@ -22,6 +22,8 @@
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
+    // header size
+    layout.headerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 40.f);
     _collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
     [_collectionView setDataSource:self];
     [_collectionView setDelegate:self];
@@ -44,6 +46,8 @@
 {
     return 10;
 }
+
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supplementCell" forIndexPath:indexPath];
