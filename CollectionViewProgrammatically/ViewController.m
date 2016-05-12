@@ -67,6 +67,71 @@
     
     return imageView;
 }
+
+- (BOOL)canDropAtRect:(CGRect)touchRect {
+    return [self indexPathForCellOverlappingRect:touchRect] != nil;
+}
+
+- (NSIndexPath *)indexPathForCellOverlappingRect:( CGRect)rect {
+    
+    CGFloat  overlappingArea = 0.0;
+    UICollectionViewCell * cellCandidate ;
+    
+    NSArray *visibleCells = [_collectionView visibleCells];
+    
+    if (visibleCells.count == 0) {
+        return [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    
+    if  (rect.origin.y > self.collectionView.contentSize.height) {
+            
+        return [NSIndexPath indexPathForRow:visibleCells.count - 1 inSection:0 ];
+    }
+    
+    for ( CustomCollectionViewCell* visible in visibleCells ) {
+        
+        CGRect intersection = CGRectIntersection(visible.frame, rect);
+        // 这个时候 overlappingArea 有用了，只有覆盖面最大的保留
+        if ( (intersection.size.width * intersection.size.height) > overlappingArea ){
+            
+            overlappingArea = intersection.size.width * intersection.size.width;
+            
+            cellCandidate = visible;
+            NSLog(@"cellCandidate %@", visible);
+        }
+        
+    }
+    
+    if (cellCandidate) {
+        
+        return [_collectionView indexPathForCell:cellCandidate];
+    }
+    
+    return nil;
+}
+
+- (void) didMoveItem:(NSObject *)item inRect: (CGRect)rect  {
+    NSIndexPath *touchIndex = [self indexPathForCellOverlappingRect:rect ];
+    if  ( touchIndex ) {
+            
+            if (touchIndex != _draggingPathOfCellBeingDragged) {
+                NSLog(@"%@, %@", touchIndex, _draggingPathOfCellBeingDragged);
+                
+                [_collectionView performBatchUpdates:^{
+                    [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
+                    
+                } completion:^(BOOL finished) {
+                    _draggingPathOfCellBeingDragged = touchIndex;
+                    [_collectionView reloadData];
+                }];
+                
+            }
+        }
+    
+}
+
+
+
 #pragma mark - gesture
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     CGPoint touchPointInCollection = [touch locationInView:_collectionView];
@@ -74,8 +139,9 @@
         UIImageView *imgView = [self representationImageAtPoint:touchPointInCollection];
         if (imgView) {
             imgView.alpha = 0.7;
+            imgView.frame = [self.view convertRect:imgView.frame fromView:_collectionView];
             CGPoint pointOnCanvas = [touch locationInView:self.view];
-            self.offSet = CGPointMake(touchPointInCollection.x - pointOnCanvas.x, touchPointInCollection.y - pointOnCanvas.y);
+            self.offSet = CGPointMake(pointOnCanvas.x - imgView.frame.origin.x, pointOnCanvas.y - imgView.frame.origin.y);
             self.sourceDraggableView = _collectionView;
             self.overDroppableView = _collectionView;
             self.representationImageView = imgView;
@@ -95,15 +161,25 @@
             case UIGestureRecognizerStateBegan: {
                 [self.view addSubview:_representationImageView];
                 self.draggingPathOfCellBeingDragged = [_collectionView indexPathForItemAtPoint:pointOnSourceDraggable];
-                
                 [_collectionView reloadData];
+                
                 break;
             }
             case UIGestureRecognizerStateChanged: {
-                
+                // 图片移动
                 CGRect repImgFrame = _representationImageView.frame;
-                repImgFrame.origin = CGPointMake(pointOnCanvas.x - _offSet.x, pointOnCanvas.y - _offSet.y);
+                // NSLog(@"%@, %@, %@", NSStringFromCGRect(_representationImageView.frame), NSStringFromCGPoint(pointOnCanvas),NSStringFromCGPoint(_offSet));
+                repImgFrame.origin = CGPointMake(pointOnCanvas.x - _offSet.x, pointOnCanvas.y - _offSet.y + 64);// uicollectionview 全屏
                 _representationImageView.frame = repImgFrame;
+                
+                // 是否需要交换
+                CGRect rect = [self.view convertRect:repImgFrame toView: _collectionView];
+                if ( [ self canDropAtRect:rect ]) {
+                    
+                    [self didMoveItem:nil  inRect: rect];
+                    
+                }
+                
                 
                 break;
             }
@@ -122,7 +198,7 @@
 #pragma mark - data
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -157,6 +233,12 @@
         cell.backgroundColor = [UIColor colorWithRed:0.19 green:0.68 blue:0.39 alpha:1.00];
     }
     cell.lblTitle.text = [NSString stringWithFormat:@"%d, %d", (int)indexPath.section , (int)indexPath.row];
+    
+    if (_draggingPathOfCellBeingDragged &&
+        _draggingPathOfCellBeingDragged.item == indexPath.item) {
+        
+        cell.hidden = YES;
+    }
     
     return cell;
 }

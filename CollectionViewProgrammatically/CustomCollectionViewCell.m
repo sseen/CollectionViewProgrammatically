@@ -15,7 +15,7 @@ CGFloat width = 30;
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"%f, %f\n", self.center.x, self.center.y);
+    
         self.lblTitle = [[UILabel alloc] init];
         self.lblTitle.frame = CGRectMake(width, width, width, width);
         [self addSubview:self.lblTitle];
