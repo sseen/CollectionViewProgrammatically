@@ -10,9 +10,17 @@
 #import "CustomCollectionViewCell.h"
 #import "CustomCollectionReusableView.h"
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, assign) CGPoint offSet;
+@property (nonatomic, strong) UIView *sourceDraggableView;
+@property (nonatomic, strong) UIView *overDroppableView;
+@property (nonatomic, strong) UIView *representationImageView;
+
+@property (nonatomic, strong) NSIndexPath* draggingPathOfCellBeingDragged ;
+
 @end
 
 @implementation ViewController
@@ -33,6 +41,81 @@
     [_collectionView setBackgroundColor:[UIColor colorWithRed:0.18 green:0.24 blue:0.31 alpha:1.00]];
     
     [self.view addSubview:_collectionView];
+    
+    UILongPressGestureRecognizer *rec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(updateForLongPress:)];
+    rec.delegate = self;
+    rec.minimumPressDuration = 0.3;
+    [self.collectionView addGestureRecognizer:rec];
+}
+#pragma mark - other
+- (BOOL)canDragAtPoint:(CGPoint)touchPoint {
+    return [_collectionView indexPathForItemAtPoint:touchPoint] != nil;
+}
+
+- (UIImageView *)representationImageAtPoint:(CGPoint)touchPoint {
+    UIImageView *imageView ;
+    NSIndexPath *index = [_collectionView indexPathForItemAtPoint:touchPoint];
+    UICollectionViewCell *cell = [_collectionView cellForItemAtIndexPath:index];
+    if (cell) {
+        UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.opaque, 0);
+        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        imageView = [[UIImageView alloc] init];
+        imageView.image = image;
+        imageView.frame = cell.frame;
+    }
+    
+    return imageView;
+}
+#pragma mark - gesture
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    CGPoint touchPointInCollection = [touch locationInView:_collectionView];
+    if ([self canDragAtPoint:touchPointInCollection]) {
+        UIImageView *imgView = [self representationImageAtPoint:touchPointInCollection];
+        if (imgView) {
+            imgView.alpha = 0.7;
+            CGPoint pointOnCanvas = [touch locationInView:self.view];
+            self.offSet = CGPointMake(touchPointInCollection.x - pointOnCanvas.x, touchPointInCollection.y - pointOnCanvas.y);
+            self.sourceDraggableView = _collectionView;
+            self.overDroppableView = _collectionView;
+            self.representationImageView = imgView;
+            
+            return true;
+        }
+    }
+    return NO;
+}
+
+- (void)updateForLongPress:(UILongPressGestureRecognizer *)rec {
+    if (_representationImageView) {
+        CGPoint pointOnCanvas = [rec locationInView:rec.view];
+        CGPoint pointOnSourceDraggable = [rec locationInView:_sourceDraggableView];
+        
+        switch (rec.state) {
+            case UIGestureRecognizerStateBegan: {
+                [self.view addSubview:_representationImageView];
+                self.draggingPathOfCellBeingDragged = [_collectionView indexPathForItemAtPoint:pointOnSourceDraggable];
+                
+                [_collectionView reloadData];
+                break;
+            }
+            case UIGestureRecognizerStateChanged: {
+                
+                CGRect repImgFrame = _representationImageView.frame;
+                repImgFrame.origin = CGPointMake(pointOnCanvas.x - _offSet.x, pointOnCanvas.y - _offSet.y);
+                _representationImageView.frame = repImgFrame;
+                
+                break;
+            }
+            case UIGestureRecognizerStateEnded: {
+                
+                break;
+            }
+            default:
+                break;
+        } // end switch
+        
+    }
     
 }
 
