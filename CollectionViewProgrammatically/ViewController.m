@@ -115,15 +115,20 @@
     if  ( touchIndex ) {
             
             if (touchIndex != _draggingPathOfCellBeingDragged) {
-                NSLog(@"%@, %@", touchIndex, _draggingPathOfCellBeingDragged);
-                
-                [_collectionView performBatchUpdates:^{
-                    [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
-                    
+                NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
+                _draggingPathOfCellBeingDragged = touchIndex;
+                [UIView animateWithDuration:5.0 delay:0.0 options:0 animations:^{
+                    [_collectionView performBatchUpdates:^{
+                        [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
+                        
+                    } completion:^(BOOL finished) {
+                        
+                        //[_collectionView reloadData];
+                    }];
                 } completion:^(BOOL finished) {
-                    _draggingPathOfCellBeingDragged = touchIndex;
-                    [_collectionView reloadData];
+//                    [_collectionView reloadData];
                 }];
+                
                 
             }
         }
@@ -180,11 +185,12 @@
                     
                 }
                 
-                
                 break;
             }
             case UIGestureRecognizerStateEnded: {
-                
+                _draggingPathOfCellBeingDragged = nil;
+                [_representationImageView removeFromSuperview];
+                [self.collectionView reloadData];
                 break;
             }
             default:
@@ -238,6 +244,8 @@
         _draggingPathOfCellBeingDragged.item == indexPath.item) {
         
         cell.hidden = YES;
+    } else {
+        cell.hidden = NO;
     }
     
     return cell;
