@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIView *representationImageView;
 
 @property (nonatomic, strong) NSIndexPath* draggingPathOfCellBeingDragged ;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
@@ -28,6 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.dataArray = [NSMutableArray array];
+    for (int i=0; i<10; i++) {
+        [_dataArray addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    
     
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
     // header size
@@ -115,8 +121,13 @@
     if  ( touchIndex ) {
             
             if (touchIndex != _draggingPathOfCellBeingDragged) {
-                NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
-                _draggingPathOfCellBeingDragged = touchIndex;
+//                NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
+//                _draggingPathOfCellBeingDragged = touchIndex;
+                
+                NSString *raw = _dataArray[_draggingPathOfCellBeingDragged.item];
+                [_dataArray removeObjectAtIndex:_draggingPathOfCellBeingDragged.item];
+                [_dataArray insertObject:raw atIndex:touchIndex.item];
+                
                 [UIView animateWithDuration:5.0 delay:0.0 options:0 animations:^{
                     [_collectionView performBatchUpdates:^{
                         [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
@@ -150,6 +161,9 @@
             self.sourceDraggableView = _collectionView;
             self.overDroppableView = _collectionView;
             self.representationImageView = imgView;
+            
+            NSIndexPath *index = [_collectionView indexPathForItemAtPoint:touchPointInCollection];
+            self.draggingPathOfCellBeingDragged = index;
             
             return true;
         }
@@ -209,7 +223,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return _dataArray.count;
 }
 
 
@@ -238,7 +252,7 @@
     } else {
         cell.backgroundColor = [UIColor colorWithRed:0.19 green:0.68 blue:0.39 alpha:1.00];
     }
-    cell.lblTitle.text = [NSString stringWithFormat:@"%d, %d", (int)indexPath.section , (int)indexPath.row];
+    cell.lblTitle.text = [NSString stringWithFormat:@"%@", _dataArray[indexPath.item]];
     
     if (_draggingPathOfCellBeingDragged &&
         _draggingPathOfCellBeingDragged.item == indexPath.item) {
