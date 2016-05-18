@@ -100,16 +100,19 @@
         // 这个时候 overlappingArea 有用了，只有覆盖面最大的保留
         if ( (intersection.size.width * intersection.size.height) > overlappingArea ){
             
-            overlappingArea = intersection.size.width * intersection.size.width;
+            overlappingArea = intersection.size.width * intersection.size.height;
             
             cellCandidate = visible;
-            NSLog(@"cellCandidate %@", visible);
+            NSLog(@"cellCandidate %@, %f, width %f, size %f",
+                  NSStringFromCGRect(cellCandidate.frame),
+                  [self.view convertRect:cellCandidate.frame fromView:_collectionView].origin.x,
+                  intersection.size.width,
+                  overlappingArea);
         }
         
     }
     
     if (cellCandidate) {
-        
         return [_collectionView indexPathForCell:cellCandidate];
     }
     
@@ -119,10 +122,8 @@
 - (void) didMoveItem:(NSObject *)item inRect: (CGRect)rect  {
     NSIndexPath *touchIndex = [self indexPathForCellOverlappingRect:rect ];
     if  ( touchIndex ) {
-            
             if (touchIndex != _draggingPathOfCellBeingDragged) {
                 NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
-                
                 
                 NSString *raw = _dataArray[_draggingPathOfCellBeingDragged.item];
                 [_dataArray removeObjectAtIndex:_draggingPathOfCellBeingDragged.item];
@@ -189,11 +190,12 @@
                 
                 // 是否需要交换
                 CGRect rect = [self.view convertRect:repImgFrame toView: _collectionView];
-                if ( [ self canDropAtRect:rect ]) {
-                    
+                NSLog(@"%@, %@", NSStringFromCGRect(repImgFrame), NSStringFromCGRect(rect));
+//                if ( [ self canDropAtRect:rect ]) {
+                
                     [self didMoveItem:nil  inRect: rect];
                     
-                }
+//                }
                 
                 break;
             }
