@@ -121,23 +121,19 @@
     if  ( touchIndex ) {
             
             if (touchIndex != _draggingPathOfCellBeingDragged) {
-//                NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
-//                _draggingPathOfCellBeingDragged = touchIndex;
+                NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
+                
                 
                 NSString *raw = _dataArray[_draggingPathOfCellBeingDragged.item];
                 [_dataArray removeObjectAtIndex:_draggingPathOfCellBeingDragged.item];
                 [_dataArray insertObject:raw atIndex:touchIndex.item];
                 
-                [UIView animateWithDuration:5.0 delay:0.0 options:0 animations:^{
-                    [_collectionView performBatchUpdates:^{
-                        [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
-                        
-                    } completion:^(BOOL finished) {
-                        
-                        //[_collectionView reloadData];
-                    }];
+                [_collectionView performBatchUpdates:^{
+                    [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
+                    _draggingPathOfCellBeingDragged = touchIndex;
                 } completion:^(BOOL finished) {
-//                    [_collectionView reloadData];
+                    
+                    //[_collectionView reloadData];
                 }];
                 
                 
