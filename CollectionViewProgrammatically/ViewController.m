@@ -137,7 +137,6 @@
                     //[_collectionView reloadData];
                 }];
                 
-                
             }
         }
     
