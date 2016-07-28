@@ -21,7 +21,9 @@
 
 @property (nonatomic, strong) NSIndexPath* draggingPathOfCellBeingDragged ;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray *dataArray2;
 
+@property (assign, nonatomic) BOOL isLongPress;
 @end
 
 @implementation ViewController
@@ -30,8 +32,10 @@
     [super viewDidLoad];
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.dataArray = [NSMutableArray array];
+    self.dataArray2 = [NSMutableArray array];
     for (int i=0; i<10; i++) {
         [_dataArray addObject:[NSString stringWithFormat:@"%d", i]];
+        [_dataArray2 addObject:[NSString stringWithFormat:@"%d1", i]];
     }
     
     
@@ -54,6 +58,13 @@
     [self.collectionView addGestureRecognizer:rec];
 }
 #pragma mark - other
+/**
+ *  点击的部位是cell 才移动
+ *
+ *  @param touchPoint point
+ *
+ *  @return
+ */
 - (BOOL)canDragAtPoint:(CGPoint)touchPoint {
     return [_collectionView indexPathForItemAtPoint:touchPoint] != nil;
 }
@@ -121,7 +132,7 @@
 
 - (void) didMoveItem:(NSObject *)item inRect: (CGRect)rect  {
     NSIndexPath *touchIndex = [self indexPathForCellOverlappingRect:rect ];
-    if  ( touchIndex ) {
+    if  ( touchIndex.section <= 0 ) {
             if (touchIndex != _draggingPathOfCellBeingDragged) {
                 NSLog(@"move %@, %@", touchIndex, _draggingPathOfCellBeingDragged);
                 
@@ -133,8 +144,8 @@
                     [_collectionView moveItemAtIndexPath:_draggingPathOfCellBeingDragged toIndexPath: touchIndex];
                     _draggingPathOfCellBeingDragged = touchIndex;
                 } completion:^(BOOL finished) {
-                    
-                    //[_collectionView reloadData];
+                    //_draggingPathOfCellBeingDragged = touchIndex;
+                    [_collectionView reloadData];
                 }];
                 
             }
@@ -145,21 +156,41 @@
 
 
 #pragma mark - gesture
+
+/**
+ *  拖动前的准备；
+ *  复制 拖动cell 副本
+ *  保存 cell indexpath
+ *
+ *  @param gestureRecognizer <#gestureRecognizer description#>
+ *  @param touch             <#touch description#>
+ *
+ *  @return <#return value description#>
+ */
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     CGPoint touchPointInCollection = [touch locationInView:_collectionView];
+    NSIndexPath *touchIndexPath = [_collectionView indexPathForItemAtPoint:touchPointInCollection];
+    if (touchIndexPath.section == 1) {
+        return NO;
+    }
+    
     if ([self canDragAtPoint:touchPointInCollection]) {
+        // 复制点击的cell
         UIImageView *imgView = [self representationImageAtPoint:touchPointInCollection];
         if (imgView) {
+            // cell 透明
             imgView.alpha = 0.7;
             imgView.frame = [self.view convertRect:imgView.frame fromView:_collectionView];
             CGPoint pointOnCanvas = [touch locationInView:self.view];
-            self.offSet = CGPointMake(pointOnCanvas.x - imgView.frame.origin.x, pointOnCanvas.y - imgView.frame.origin.y);
+            self.offSet = CGPointMake(pointOnCanvas.x - imgView.frame.origin.x, pointOnCanvas.y - imgView.frame.origin.y + _collectionView.contentOffset.y + 64);
             self.sourceDraggableView = _collectionView;
             self.overDroppableView = _collectionView;
             self.representationImageView = imgView;
-            
+            // 拖动的 index
             NSIndexPath *index = [_collectionView indexPathForItemAtPoint:touchPointInCollection];
             self.draggingPathOfCellBeingDragged = index;
+            
+            _isLongPress = false;
             
             return true;
         }
@@ -167,16 +198,23 @@
     return NO;
 }
 
+/**
+ *  拖动过程
+ *
+ *  @param rec <#rec description#>
+ */
 - (void)updateForLongPress:(UILongPressGestureRecognizer *)rec {
+    // 拖动的 cell 副本
     if (_representationImageView) {
         CGPoint pointOnCanvas = [rec locationInView:rec.view];
         CGPoint pointOnSourceDraggable = [rec locationInView:_sourceDraggableView];
         
         switch (rec.state) {
             case UIGestureRecognizerStateBegan: {
+                _isLongPress = true;
                 [self.view addSubview:_representationImageView];
-                self.draggingPathOfCellBeingDragged = [_collectionView indexPathForItemAtPoint:pointOnSourceDraggable];
                 [_collectionView reloadData];
+                self.draggingPathOfCellBeingDragged = [_collectionView indexPathForItemAtPoint:pointOnSourceDraggable];
                 
                 break;
             }
@@ -201,7 +239,8 @@
             case UIGestureRecognizerStateEnded: {
                 _draggingPathOfCellBeingDragged = nil;
                 [_representationImageView removeFromSuperview];
-                [self.collectionView reloadData];
+                [_collectionView reloadData];
+//                [_collectionView endInteractiveMovement];
                 break;
             }
             default:
@@ -215,12 +254,16 @@
 #pragma mark - data
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _dataArray.count;
+    if (section == 0) {
+        return _dataArray.count;
+    } else {
+        return _dataArray2.count;
+    }
 }
 
 
@@ -243,21 +286,25 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionViewCell  *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    cell.hidden = NO;
     
     if (indexPath.section == 0) {
         cell.backgroundColor = [UIColor colorWithRed:0.23 green:0.60 blue:0.85 alpha:1.00];
+        if (_draggingPathOfCellBeingDragged &&
+            _draggingPathOfCellBeingDragged.item == indexPath.item &&
+            _isLongPress) {
+            
+            cell.hidden = YES;
+        } else {
+            cell.hidden = NO;
+        }
+        cell.lblTitle.text = [NSString stringWithFormat:@"%@", _dataArray[indexPath.item]];
     } else {
         cell.backgroundColor = [UIColor colorWithRed:0.19 green:0.68 blue:0.39 alpha:1.00];
+        cell.lblTitle.text = [NSString stringWithFormat:@"%@", _dataArray2[indexPath.item]];
     }
-    cell.lblTitle.text = [NSString stringWithFormat:@"%@", _dataArray[indexPath.item]];
     
-    if (_draggingPathOfCellBeingDragged &&
-        _draggingPathOfCellBeingDragged.item == indexPath.item) {
-        
-        cell.hidden = YES;
-    } else {
-        cell.hidden = NO;
-    }
+    
     
     return cell;
 }
