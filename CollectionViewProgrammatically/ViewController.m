@@ -302,6 +302,10 @@
 {
     CustomCollectionViewCell  *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     cell.hidden = NO;
+    cell.indexPath = indexPath;
+    cell.block = ^((indexPath) {
+        
+    });
     
     if (indexPath.section == 0) {
         cell.backgroundColor = [UIColor colorWithRed:0.23 green:0.60 blue:0.85 alpha:1.00];
