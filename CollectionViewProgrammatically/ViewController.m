@@ -171,6 +171,21 @@
     CGPoint touchPointInCollection = [touch locationInView:_collectionView];
     NSIndexPath *touchIndexPath = [_collectionView indexPathForItemAtPoint:touchPointInCollection];
     if (touchIndexPath.section == 1) {
+        
+        NSString *willDeleteStr = _dataArray2[touchIndexPath.item];
+        [_dataArray2 removeObjectAtIndex:touchIndexPath.item];
+        [_dataArray addObject:willDeleteStr];
+        NSIndexPath *willInsertIndexPath = [NSIndexPath indexPathForRow:_dataArray.count-1 inSection:0];
+        
+        
+        [_collectionView performBatchUpdates:^{
+            [_collectionView deleteItemsAtIndexPaths:@[touchIndexPath]];
+            [_collectionView insertItemsAtIndexPaths:@[willInsertIndexPath]];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        
         return NO;
     }
     
