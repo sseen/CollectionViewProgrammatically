@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^tapCloseDoneBlock)(NSIndexPath *indexPath);
+typedef void (^tapCloseDoneBlock)(NSIndexPath *);
 
 @interface CustomCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UILabel *lblTitle;
 @property (nonatomic, strong) NSIndexPath *indexPath;
-@property (nonatomic, weak) tapCloseDoneBlock block;
-
-- (void)tapCloseDone:(void (^)(NSIndexPath *indexPath))done;
+@property (nonatomic, strong) tapCloseDoneBlock block;
 
 @end

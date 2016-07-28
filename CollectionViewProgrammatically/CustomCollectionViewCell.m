@@ -32,7 +32,7 @@ CGFloat width = 30;
 }
 
 - (void)tapClose:(UIButton *)sender {
-    tapCloseDoneBlock(_indexPath);
+    _block(_indexPath);
 }
 
 @end

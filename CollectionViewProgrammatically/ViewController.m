@@ -303,9 +303,22 @@
     CustomCollectionViewCell  *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     cell.hidden = NO;
     cell.indexPath = indexPath;
-    cell.block = ^((indexPath) {
+    cell.block = ^(NSIndexPath * indexPath) {
         
-    });
+        NSString *willDeleteStr = _dataArray[indexPath.item];
+        [_dataArray removeObjectAtIndex:indexPath.item];
+        [_dataArray2 addObject:willDeleteStr];
+        NSIndexPath *willInsertIndexPath = [NSIndexPath indexPathForRow:_dataArray2.count-1 inSection:1];
+        
+        
+        [_collectionView performBatchUpdates:^{
+            [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            [_collectionView insertItemsAtIndexPaths:@[willInsertIndexPath]];
+        } completion:^(BOOL finished) {
+            [_collectionView reloadData];
+        }];
+        
+    };
     
     if (indexPath.section == 0) {
         cell.backgroundColor = [UIColor colorWithRed:0.23 green:0.60 blue:0.85 alpha:1.00];
