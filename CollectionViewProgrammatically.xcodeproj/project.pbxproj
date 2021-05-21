@@ -10,6 +10,7 @@
 		9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */; };
 		9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */; };
 		F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */; };
+		F8C804AF2658158B00284DE2 /* SNTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */; };
 		FC3570441CBF28BB00C4F404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570431CBF28BB00C4F404 /* main.m */; };
 		FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570461CBF28BB00C4F404 /* AppDelegate.m */; };
 		FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570491CBF28BB00C4F404 /* ViewController.m */; };
@@ -44,6 +45,7 @@
 		9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionReusableView.m; sourceTree = "<group>"; };
 		F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CollectionViewProgrammatically-Bridging-Header.h"; sourceTree = "<group>"; };
 		F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNCollectionViewController.swift; sourceTree = "<group>"; };
+		F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC35703F1CBF28BB00C4F404 /* CollectionViewProgrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewProgrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3570431CBF28BB00C4F404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC3570451CBF28BB00C4F404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		FC3570361CBF28BB00C4F404 = {
 			isa = PBXGroup;
 			children = (
+				F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */,
 				F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */,
 				F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */,
 				FC3570411CBF28BB00C4F404 /* CollectionViewProgrammatically */,
@@ -292,6 +295,7 @@
 				F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */,
 				FC3570441CBF28BB00C4F404 /* main.m in Sources */,
 				9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */,
+				F8C804AF2658158B00284DE2 /* SNTitleCollectionViewCell.swift in Sources */,
 				9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -423,7 +427,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
