@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */; };
 		9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */; };
+		F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */; };
 		FC3570441CBF28BB00C4F404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570431CBF28BB00C4F404 /* main.m */; };
 		FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570461CBF28BB00C4F404 /* AppDelegate.m */; };
 		FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570491CBF28BB00C4F404 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 		9233AC731CDC409C005221CC /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
 		9233AC751CDC6CEA005221CC /* CustomCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionReusableView.h; sourceTree = "<group>"; };
 		9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionReusableView.m; sourceTree = "<group>"; };
+		F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CollectionViewProgrammatically-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNCollectionViewController.swift; sourceTree = "<group>"; };
 		FC35703F1CBF28BB00C4F404 /* CollectionViewProgrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewProgrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3570431CBF28BB00C4F404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC3570451CBF28BB00C4F404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 		FC3570361CBF28BB00C4F404 = {
 			isa = PBXGroup;
 			children = (
+				F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */,
+				F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */,
 				FC3570411CBF28BB00C4F404 /* CollectionViewProgrammatically */,
 				FC35705B1CBF28BB00C4F404 /* CollectionViewProgrammaticallyTests */,
 				FC3570661CBF28BB00C4F404 /* CollectionViewProgrammaticallyUITests */,
@@ -217,6 +222,7 @@
 				TargetAttributes = {
 					FC35703E1CBF28BB00C4F404 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 1250;
 					};
 					FC3570571CBF28BB00C4F404 = {
 						CreatedOnToolsVersion = 7.3;
@@ -233,6 +239,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -282,6 +289,7 @@
 			files = (
 				FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */,
 				FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */,
+				F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */,
 				FC3570441CBF28BB00C4F404 /* main.m in Sources */,
 				9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */,
 				9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */,
@@ -427,10 +435,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CollectionViewProgrammatically/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssn.CollectionViewProgrammatically;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CollectionViewProgrammatically-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -438,16 +450,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = CollectionViewProgrammatically/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssn.CollectionViewProgrammatically;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CollectionViewProgrammatically-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		FC3570701CBF28BC00C4F404 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CollectionViewProgrammaticallyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -460,6 +476,7 @@
 		FC3570711CBF28BC00C4F404 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = CollectionViewProgrammaticallyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -472,6 +489,7 @@
 		FC3570731CBF28BC00C4F404 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CollectionViewProgrammaticallyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssn.CollectionViewProgrammaticallyUITests;
@@ -483,6 +501,7 @@
 		FC3570741CBF28BC00C4F404 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = CollectionViewProgrammaticallyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssn.CollectionViewProgrammaticallyUITests;
