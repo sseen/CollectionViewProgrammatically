@@ -16,17 +16,52 @@ class SNTitleCollectionViewCell: UICollectionViewCell {
         
         return one
     }()
+    
+    let separatorLine: UIView = {
+        let one = UIView()
+        one.backgroundColor = .separator
+        one.translatesAutoresizingMaskIntoConstraints = false
+        
+        return one
+    }()
+    
+    let indicatorImg: UIImageView = {
+        let one = UIImageView(image: UIImage(systemName: "chevron.right"))
+        one.contentMode = .scaleAspectFit
+        one.translatesAutoresizingMaskIntoConstraints = false
+        
+        return one
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemPurple
         contentView.addSubview(lblTitle)
+        contentView.addSubview(separatorLine)
+        contentView.addSubview(indicatorImg)
+
+        NSLayoutConstraint.activate([
+            
+            separatorLine.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
+            separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            indicatorImg.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            indicatorImg.heightAnchor.constraint(equalToConstant: 20),
+            indicatorImg.widthAnchor.constraint(equalToConstant: 20),
+            indicatorImg.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
+            
+            lblTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            lblTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18)
+            
+        ])
         
         NSLayoutConstraint.activate([
             lblTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             lblTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18)
         ])
         
-        contentView.backgroundColor = .systemYellow
+        contentView.backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
