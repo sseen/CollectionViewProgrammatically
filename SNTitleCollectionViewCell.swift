@@ -41,7 +41,7 @@ class SNTitleCollectionViewCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             
-            separatorLine.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale),
+            separatorLine.heightAnchor.constraint(equalToConstant: NSCollectionLayoutDimension.fractionalWidth(0.5).dimension),//1 / UIScreen.main.scale),
             separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
             separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
