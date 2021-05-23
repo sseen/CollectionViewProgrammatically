@@ -11,6 +11,8 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class SNCollectionViewController: UICollectionViewController {
+    
+    let titleArr = ["auto fit label and image"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,13 @@ class SNCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SNTitleCollectionViewCell
     
         // Configure the cell
-        cell.lblTitle.text = "\(indexPath.section) \(indexPath.row)"
+        var title = ""
+        if indexPath.row >= titleArr.count {
+            title = titleArr.first!
+        } else {
+            title = titleArr[indexPath.row]
+        }
+        cell.lblTitle.text = "\(indexPath.section) \(indexPath.row) \(title)"
     
         return cell
     }
@@ -69,8 +77,13 @@ class SNCollectionViewController: UICollectionViewController {
 
 extension SNCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             performSegue(withIdentifier: "estimate", sender: nil)
+        case 1:
+            navigationController?.pushViewController(SNEdgedListCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout()), animated: true)
+        default:
+            break
         }
     }
 }

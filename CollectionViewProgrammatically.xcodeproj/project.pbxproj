@@ -13,6 +13,7 @@
 		F8C804AF2658158B00284DE2 /* SNTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */; };
 		F8C804B126594FD000284DE2 /* SNEstimateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */; };
 		F8C804B32659EAC000284DE2 /* SNEstimateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */; };
+		F8C804B5265AA48C00284DE2 /* SNEdgedListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804B4265AA48C00284DE2 /* SNEdgedListCollectionViewController.swift */; };
 		FC3570441CBF28BB00C4F404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570431CBF28BB00C4F404 /* main.m */; };
 		FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570461CBF28BB00C4F404 /* AppDelegate.m */; };
 		FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570491CBF28BB00C4F404 /* ViewController.m */; };
@@ -50,6 +51,7 @@
 		F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNEstimateCollectionViewController.swift; sourceTree = "<group>"; };
 		F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNEstimateCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C804B4265AA48C00284DE2 /* SNEdgedListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNEdgedListCollectionViewController.swift; sourceTree = "<group>"; };
 		FC35703F1CBF28BB00C4F404 /* CollectionViewProgrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewProgrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3570431CBF28BB00C4F404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC3570451CBF28BB00C4F404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		FC3570361CBF28BB00C4F404 = {
 			isa = PBXGroup;
 			children = (
+				F8C804B4265AA48C00284DE2 /* SNEdgedListCollectionViewController.swift */,
 				F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */,
 				F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */,
 				F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */,
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */,
+				F8C804B5265AA48C00284DE2 /* SNEdgedListCollectionViewController.swift in Sources */,
 				F8C804B32659EAC000284DE2 /* SNEstimateCollectionViewCell.swift in Sources */,
 				FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */,
 				F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */,
