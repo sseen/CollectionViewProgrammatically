@@ -66,3 +66,11 @@ class SNCollectionViewController: UICollectionViewController {
     }
 
 }
+
+extension SNCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            performSegue(withIdentifier: "estimate", sender: nil)
+        }
+    }
+}

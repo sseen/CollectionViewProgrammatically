@@ -11,6 +11,8 @@
 		9233AC771CDC6CEA005221CC /* CustomCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9233AC761CDC6CEA005221CC /* CustomCollectionReusableView.m */; };
 		F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */; };
 		F8C804AF2658158B00284DE2 /* SNTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */; };
+		F8C804B126594FD000284DE2 /* SNEstimateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */; };
+		F8C804B32659EAC000284DE2 /* SNEstimateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */; };
 		FC3570441CBF28BB00C4F404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570431CBF28BB00C4F404 /* main.m */; };
 		FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570461CBF28BB00C4F404 /* AppDelegate.m */; };
 		FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3570491CBF28BB00C4F404 /* ViewController.m */; };
@@ -46,6 +48,8 @@
 		F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CollectionViewProgrammatically-Bridging-Header.h"; sourceTree = "<group>"; };
 		F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNCollectionViewController.swift; sourceTree = "<group>"; };
 		F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNEstimateCollectionViewController.swift; sourceTree = "<group>"; };
+		F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNEstimateCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC35703F1CBF28BB00C4F404 /* CollectionViewProgrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewProgrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC3570431CBF28BB00C4F404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC3570451CBF28BB00C4F404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,8 +96,10 @@
 		FC3570361CBF28BB00C4F404 = {
 			isa = PBXGroup;
 			children = (
-				F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */,
+				F8C804B026594FD000284DE2 /* SNEstimateCollectionViewController.swift */,
+				F8C804B22659EAC000284DE2 /* SNEstimateCollectionViewCell.swift */,
 				F8C804AC2657FB8400284DE2 /* SNCollectionViewController.swift */,
+				F8C804AE2658158B00284DE2 /* SNTitleCollectionViewCell.swift */,
 				F8C804AB2657FB8400284DE2 /* CollectionViewProgrammatically-Bridging-Header.h */,
 				FC3570411CBF28BB00C4F404 /* CollectionViewProgrammatically */,
 				FC35705B1CBF28BB00C4F404 /* CollectionViewProgrammaticallyTests */,
@@ -220,7 +226,7 @@
 		FC3570371CBF28BB00C4F404 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = ssn;
 				TargetAttributes = {
 					FC35703E1CBF28BB00C4F404 = {
@@ -239,10 +245,9 @@
 			};
 			buildConfigurationList = FC35703A1CBF28BB00C4F404 /* Build configuration list for PBXProject "CollectionViewProgrammatically" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -291,8 +296,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC35704A1CBF28BB00C4F404 /* ViewController.m in Sources */,
+				F8C804B32659EAC000284DE2 /* SNEstimateCollectionViewCell.swift in Sources */,
 				FC3570471CBF28BB00C4F404 /* AppDelegate.m in Sources */,
 				F8C804AD2657FB8400284DE2 /* SNCollectionViewController.swift in Sources */,
+				F8C804B126594FD000284DE2 /* SNEstimateCollectionViewController.swift in Sources */,
 				FC3570441CBF28BB00C4F404 /* main.m in Sources */,
 				9233AC741CDC409C005221CC /* CustomCollectionViewCell.m in Sources */,
 				F8C804AF2658158B00284DE2 /* SNTitleCollectionViewCell.swift in Sources */,
@@ -355,18 +362,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -400,18 +419,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -430,6 +461,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
