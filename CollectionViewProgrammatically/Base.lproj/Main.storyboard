@@ -79,6 +79,7 @@
                                             </constraints>
                                         </imageView>
                                     </subviews>
+                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                     <constraints>
                                         <constraint firstItem="Zsb-vS-IdK" firstAttribute="top" secondItem="Tcu-lg-e9s" secondAttribute="top" id="5Nb-1U-O3f"/>
                                         <constraint firstAttribute="trailing" secondItem="Zsb-vS-IdK" secondAttribute="trailing" constant="16" id="7xN-DG-sYS"/>
@@ -142,6 +143,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

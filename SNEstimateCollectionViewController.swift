@@ -15,6 +15,7 @@ class SNEstimateCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.collectionViewLayout = createLayout()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -52,7 +53,14 @@ class SNEstimateCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         if let label = cell.lblTitle {
-            label.text = "\(indexPath.row)"
+            switch indexPath.row % 3 {
+            case 0:
+                label.text = "\(indexPath.row)"
+            case 1:
+                label.text = "\(indexPath.row) In a storyboard-based application, you will often want to do a little preparation before navigation override func prepare(for segue: UIStoryboardSegue, sender: Any?)"
+            default:
+                label.text = ""
+            }
         }
         if let img = cell.imgIcon {
             img.image = UIImage(systemName: "\(indexPath.row).circle")
@@ -60,6 +68,22 @@ class SNEstimateCollectionViewController: UICollectionViewController {
     
         return cell
     }
+    
+    private func createLayout() -> UICollectionViewLayout {
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                 heightDimension: .estimated(60))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: .fixed(8), trailing: nil, bottom: .fixed(8))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .estimated(60))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                             subitems: [item])
+
+            let section = NSCollectionLayoutSection(group: group)
+
+            let layout = UICollectionViewCompositionalLayout(section: section)
+            return layout
+        }
 
     // MARK: UICollectionViewDelegate
 
