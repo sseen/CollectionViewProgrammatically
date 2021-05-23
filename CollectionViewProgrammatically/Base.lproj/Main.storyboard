@@ -66,7 +66,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUe-2a-sxe">
-                                            <rect key="frame" x="16.000000000000004" y="8" width="41.333333333333343" height="112"/>
+                                            <rect key="frame" x="16.000000000000004" y="8" width="41.333333333333343" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="KzT-69-4YH"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -83,7 +86,7 @@
                                     <constraints>
                                         <constraint firstItem="Zsb-vS-IdK" firstAttribute="top" secondItem="Tcu-lg-e9s" secondAttribute="top" id="5Nb-1U-O3f"/>
                                         <constraint firstAttribute="trailing" secondItem="Zsb-vS-IdK" secondAttribute="trailing" constant="16" id="7xN-DG-sYS"/>
-                                        <constraint firstAttribute="bottom" secondItem="bUe-2a-sxe" secondAttribute="bottom" constant="8" id="TaK-6F-z2K"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bUe-2a-sxe" secondAttribute="bottom" constant="8" id="TaK-6F-z2K"/>
                                         <constraint firstItem="bUe-2a-sxe" firstAttribute="leading" secondItem="Tcu-lg-e9s" secondAttribute="leading" constant="16" id="WTW-wa-pvO"/>
                                         <constraint firstItem="bUe-2a-sxe" firstAttribute="top" secondItem="Tcu-lg-e9s" secondAttribute="top" constant="8" id="fYS-YV-qHG"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bUe-2a-sxe" secondAttribute="trailing" constant="100" id="jFj-0E-YhJ"/>
