@@ -15,12 +15,14 @@ class SNEdgedListCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "edged list"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(SNTitleCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.collectionViewLayout = createLayout()
+        collectionView.backgroundColor = .systemBackground
 
         // Do any additional setup after loading the view.
     }
@@ -44,6 +46,7 @@ class SNEdgedListCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         cell.lblTitle.text = "\(indexPath.section) \(indexPath.row)"
+        cell.contentView.backgroundColor = .systemYellow
     
         return cell
     }

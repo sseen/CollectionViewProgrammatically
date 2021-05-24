@@ -15,6 +15,7 @@ class SNEstimateCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "estimate"
         collectionView.collectionViewLayout = createLayout()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

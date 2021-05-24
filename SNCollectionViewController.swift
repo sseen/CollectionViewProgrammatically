@@ -5,6 +5,7 @@
 //  Created by solo on 2021/5/21.
 //  Copyright © 2021 ssn. All rights reserved.
 //
+// [All you need to know about UICollectionViewCompositionalLayout](https://medium.com/flawless-app-stories/all-what-you-need-to-know-about-uicollectionviewcompositionallayout-f3b2f590bdbe)
 
 import UIKit
 
@@ -12,10 +13,11 @@ private let reuseIdentifier = "Cell"
 
 class SNCollectionViewController: UICollectionViewController {
     
-    let titleArr = ["auto fit label and image"]
+    let titleArr = ["auto fit label and image","edged list", "complex group"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "collection"
         collectionView.backgroundColor = .secondarySystemBackground
 
         // Uncomment the following line to preserve selection between presentations
